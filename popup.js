@@ -7,7 +7,7 @@ function getCurrentTabUrl(callback) {
   chrome.tabs.query(queryInfo, function(tabs) {
     var tab = tabs[0];
     var url = tab.url;
-    
+
     getVisitedTimes(url, function(times){
       renderVisitedTimes('Visited Times: ' + times)
     });
@@ -18,7 +18,7 @@ function getCurrentTabUrl(callback) {
   });
 }
 function getVisitedTimes(url, callback) {
-  var domain = url.split('/')[2].split(':')[0]
+  var domain = url.split('/')[2].split(':')[0].replace(/(www\.)|(mail\.)|(map\.)|(wiki\.)/, '')
   chrome.history.search({text:domain, startTime:1000000 ,maxResults:1000000}, function(results){
     callback(results.length);
   });
