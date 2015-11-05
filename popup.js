@@ -1,3 +1,4 @@
+'use strict';
 function getCurrentTabUrl(callback) {
   var queryInfo = {
     active: true,
@@ -39,8 +40,30 @@ function renderVisitedTimes(visitedTimesText) {
   document.getElementById('visitedTimes').textContent = visitedTimesText;
 }
 
+function renderTop5Websites() {
+  chrome.history.search({text:"", startTime:1 ,maxResults:1000000}, function(results){
+    var domainMap = new Map();
+    for(let result of results) {
+      var domain = result.url.split('/')[2].split(':')[0].replace(/(www\.)|(mail\.)|(map\.)|(wiki\.)/, '')
+      if(domainMap.has(domain)){
+        domainMap.set(domain, domainMap.get(domain) + 1);
+      }
+      else {
+        domainMap.set(domain, 1);
+      }
+    }
+    var sortedDomainMap = [...domainMap.entries()].sort((a,b) => a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0)
+    let topContent = '';
+    for(let i = 0; i < 5; ++i){
+      topContent += (sortedDomainMap[i][0] + ": " + sortedDomainMap[i][1] + "<br />");
+    }
+    document.getElementById('top').innerHTML = topContent;
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
       renderUrl('Current Url: ' + url);
   });
+  renderTop5Websites();
 });
