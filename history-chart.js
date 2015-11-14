@@ -7,35 +7,35 @@ function renderData(data){
             fontFamily: "Verdana",
             fontColor: "Peru",
             fontSize: 20
-
         },
         animationEnabled: true,
         axisY: {
             tickThickness: 0,
             lineThickness: 0,
             valueFormatString: " ",
-            gridThickness: 0                    
+            gridThickness: 0,
         },
         axisX: {
             tickThickness: 0,
             lineThickness: 0,
             labelFontSize: 18,
-            labelFontColor: "Peru"
-
+            labelFontColor: "#2A7A78"
         },
+        backgroundColor: "#D1E5F0",
         data: [
         {
             indexLabelFontSize: 10,
-            toolTipContent: "<span style='\"'color: {color};'\"'><strong>{indexLabel}</strong></span><span style='\"'font-size: 20px; color:peru '\"'><strong>{y}</strong></span>",
+            toolTipContent: "<span style='\"'font-size: 20px; color:peru '\"'><strong>{y} times</strong></span>",
 
-            indexLabelPlacement: "inside",
-            indexLabelFontColor: "white",
+            indexLabelPlacement: "outside",
+            indexLabelFontColor: "#610606",
             indexLabelFontWeight: 200,
+            indexLabelFontSize: 13,
             indexLabelFontFamily: "Verdana",
             color: "#62C9C3",
             type: "bar",
             dataPoints: data
-        }
+        },
         ]
     });
     chart.render();
@@ -56,7 +56,7 @@ window.onload = function () {
     }
     var sortedDomainMap = [...domainMap.entries()].sort((a,b) => a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0)
     for(let i = 4; i >= 0; --i){
-      historyData.push({y: sortedDomainMap[i][1], label: sortedDomainMap[i][0]});
+      historyData.push({y: sortedDomainMap[i][1], label: sortedDomainMap[i][0], indexLabel: sortedDomainMap[i][1].toString()});
     }
     renderData(historyData);
   });
