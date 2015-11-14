@@ -13,8 +13,6 @@ function getCurrentTabUrl(callback) {
       renderVisitedTimes('Visited Times: ' + times)
     });
 
-    console.assert(typeof url == 'string', 'tab.url should be a string');
-
     callback(url);
   });
 }
@@ -29,11 +27,11 @@ function getVisitedTimes(url, callback) {
 
 function renderLastVisited(epochTime) {
   var timeAgo = moment(epochTime).fromNow();  
-  document.getElementById('lastVisited').textContent = "lastVisited: " + timeAgo;
+  document.getElementById('lastVisited').textContent = "Last Visited: " + timeAgo;
 }
 
-function renderUrl(statusText) {
-  document.getElementById('url').textContent = statusText;
+function renderUrl(currentUrl) {
+  document.getElementById('url').textContent = currentUrl;
 }
 
 function renderVisitedTimes(visitedTimesText) {
@@ -42,6 +40,8 @@ function renderVisitedTimes(visitedTimesText) {
 
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
-      renderUrl('Current Url: ' + url);
+    if(url.length > 35)
+      url = url.substr(0, 34) + "..."
+    renderUrl('Current Url: ' + url);
   });
 });

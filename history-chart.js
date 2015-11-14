@@ -1,27 +1,6 @@
 'use strict';
 
-window.onload = function () {
-  let historyData = [];
-  
-  chrome.history.search({text:"", startTime:1 ,maxResults:1000000}, function(results){
-    var domainMap = new Map();
-    for(let result of results) {
-      var domain = result.url.split('/')[2].split(':')[0].replace(/(www\.)|(mail\.)|(map\.)|(wiki\.)/, '')
-      if(domainMap.has(domain)){
-        domainMap.set(domain, domainMap.get(domain) + 1);
-      }
-      else {
-        domainMap.set(domain, 1);
-      }
-    }
-    var sortedDomainMap = [...domainMap.entries()].sort((a,b) => a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0)
-    for(let i = 4; i >= 0; --i){
-      historyData.push({y: sortedDomainMap[i][1], label: sortedDomainMap[i][0]});
-    }
-    renderData(historyData);
-  });
-  
-  function renderData(data){
+function renderData(data){
     var chart = new CanvasJS.Chart("chartContainer", {
         title: {
             text: "Top 5 Visited Sites",
@@ -59,7 +38,26 @@ window.onload = function () {
         }
         ]
     });
-
     chart.render();
-  }
+}
+
+window.onload = function () {
+  let historyData = [];
+  chrome.history.search({text:"", startTime:1 ,maxResults:1000000}, function(results){
+    var domainMap = new Map();
+    for(let result of results) {
+      var domain = result.url.split('/')[2].split(':')[0].replace(/(www\.)|(mail\.)|(map\.)|(wiki\.)/, '')
+      if(domainMap.has(domain)){
+        domainMap.set(domain, domainMap.get(domain) + 1);
+      }
+      else {
+        domainMap.set(domain, 1);
+      }
+    }
+    var sortedDomainMap = [...domainMap.entries()].sort((a,b) => a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0)
+    for(let i = 4; i >= 0; --i){
+      historyData.push({y: sortedDomainMap[i][1], label: sortedDomainMap[i][0]});
+    }
+    renderData(historyData);
+  });
 }
