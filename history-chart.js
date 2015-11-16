@@ -46,10 +46,7 @@ window.onload = function () {
   chrome.history.search({text:"", startTime:1 ,maxResults:1000000}, function(results){
     var domainMap = new Map();
     for(let result of results) {
-      var domain = result.url.split('/')[2].split(':')[0];
-      if(domain.split('.').length > 2){
-        domain = domain.split('.')[1] + '.' + domain.split('.')[2]
-      }
+      var domain = new URI(result.url).domain();
       if(domainMap.has(domain)){
         domainMap.set(domain, domainMap.get(domain) + 1);
       }
@@ -58,7 +55,6 @@ window.onload = function () {
       }
     }
     var sortedDomainMap = [...domainMap.entries()].sort((a,b) => a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0)
-    console.log(sortedDomainMap)
     for(let i = 4; i >= 0; --i){
       historyData.push({y: sortedDomainMap[i][1], label: sortedDomainMap[i][0], indexLabel: sortedDomainMap[i][1].toString()});
     }

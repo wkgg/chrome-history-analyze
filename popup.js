@@ -18,15 +18,13 @@ function getCurrentTabUrl(callback) {
 }
 
 function getVisitedTimes(url, callback) {
-  var domain = url.split('/')[2].split(':')[0];
-  if(domain.split('.').length > 2){
-    domain = domain.split('.')[1] + '.' + domain.split('.')[2]
-  }
+  var domain = new URI(url).domain();
   chrome.history.search({text:domain, startTime:1 ,maxResults:1000000}, function(results){
-    if(results.length > 1){
-      renderLastVisited(results[1].lastVisitTime);
+    var filteredResults = results.filter(result => new URI(result.url).domain() == domain)
+    if(filteredResults.length > 1){
+      renderLastVisited(filteredResults[1].lastVisitTime);
     }
-    callback(results.length);
+    callback(filteredResults.length);
   });
 }
 
