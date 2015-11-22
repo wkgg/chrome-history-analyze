@@ -2,13 +2,13 @@
   "manifest_version": 2,
 
   "name": "Analyze history",
-  "description": "Analyze your chrome history, analyze your life",
+  "description": "An extension that show you how often you visited current website, and tell you your top 5 visited websites",
   "version": "1.0",
 
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html",
-    "default_title": "Click here!"
+    "default_title": "Analyse your history!"
   },
   "permissions": [
     "activeTab",

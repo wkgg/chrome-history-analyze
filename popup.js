@@ -10,7 +10,7 @@ function getCurrentTabUrl(callback) {
     var url = tab.url;
 
     getVisitedTimes(url, function(times){
-      renderVisitedTimes('Visited Times: ' + times)
+      renderVisitedTimes(times);
     });
 
     callback(url);
@@ -30,15 +30,15 @@ function getVisitedTimes(url, callback) {
 
 function renderLastVisited(epochTime) {
   var timeAgo = moment(epochTime).fromNow();  
-  document.getElementById('lastVisited').textContent = "Last Visited: " + timeAgo;
+  document.getElementById('lastVisited').innerHTML = "<span class='title'>Last Visited: </span>" + timeAgo;
 }
 
 function renderUrl(currentUrl) {
   document.getElementById('url').textContent = currentUrl;
 }
 
-function renderVisitedTimes(visitedTimesText) {
-  document.getElementById('visitedTimes').textContent = visitedTimesText;
+function renderVisitedTimes(visitedTimes) {
+  document.getElementById('visitedTimes').innerHTML = "<span class='title'>Visited Times: </span>" + visitedTimes;
 }
 
 document.addEventListener('DOMContentLoaded', function() {

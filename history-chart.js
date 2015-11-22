@@ -3,11 +3,12 @@
 function renderData(data){
     var chart = new CanvasJS.Chart("chartContainer", {
         title: {
-            text: "Top 5 Visited Sites",
+            text: "",
             fontFamily: "Verdana",
             fontColor: "Peru",
             fontSize: 20
         },
+        height: 180,
         animationEnabled: true,
         axisY: {
             tickThickness: 0,
@@ -19,20 +20,20 @@ function renderData(data){
             tickThickness: 0,
             lineThickness: 0,
             labelFontSize: 18,
-            labelFontColor: "#2A7A78"
+            labelFontColor: "#515151"
         },
-        backgroundColor: "#D1E5F0",
+        backgroundColor: "#ffffff",
         data: [
         {
             indexLabelFontSize: 10,
             toolTipContent: "<span style='\"'font-size: 20px; color:peru '\"'><strong>{y} times</strong></span>",
 
             indexLabelPlacement: "outside",
-            indexLabelFontColor: "#610606",
+            indexLabelFontColor: "#515151",
             indexLabelFontWeight: 200,
             indexLabelFontSize: 13,
             indexLabelFontFamily: "Verdana",
-            color: "#62C9C3",
+            color: "#2eb7d0",
             type: "bar",
             dataPoints: data
         },
