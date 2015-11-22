@@ -1,0 +1,72 @@
+body {
+  font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+  font-size: 100%;
+  height: 100px;
+  width: 450px;
+  background-color:#ffffff;
+}
+
+#url {
+  color: #f4f2f2;
+  background-color: #34b4f1;
+  text-align: center;
+  height: 25px;
+  margin: -10px -10px 0;
+  padding-top: 10px;
+}
+
+#url:after {
+  content: "";
+  display: block;
+  padding-top: 6px;
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 1px solid #f4f2f3;
+}
+
+.visited {
+  background-color: #34b4f1;
+  margin: 0px -10px;
+  height: 25px;
+  padding-top: 5px;
+}
+
+#visitedTimes {
+  color: #f4f2f2;
+  display: inline-block;
+  margin-left: 3em;
+}
+
+#visitedTimes:after {
+  content: "";
+  display: block;
+  position:absolute;
+  left:45%;
+  top:15%;
+  bottom:80%;
+  border-left:1px solid #f4f2f3;
+}
+#lastVisited {
+  color: #f4f2f2;
+  display: inline-block;
+  margin-left: 4em;
+}
+
+#visitedTimes .title, #lastVisited .title {
+  font-size: 80%;
+}
+
+.top5 {
+  color: #34b4f0;
+  text-align: center;
+  background-color: #f3f4f8;
+  margin: 0 -10px;
+  height: 25px;
+  padding-top: 10px;
+  font-size: 20px;
+}
+
+.chartContainer {
+  height: 180px; 
+  width: 100%;
+}
